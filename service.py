@@ -6,7 +6,7 @@ from slow_job import slow_job
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
-redis_conn = Redis('localhost', 6379)
+redis_conn = Redis(host='redis', port=6379)
 q = Queue(connection=redis_conn)
 
 jobs = {}
@@ -29,4 +29,4 @@ def addJob():
     return job.get_id()
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0", debug=True)
