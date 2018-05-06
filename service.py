@@ -1,10 +1,14 @@
 from flask import Flask, request, jsonify
 from rq import Queue
 from redis import Redis
+import rq_dashboard
+
 from slow_job import slow_job
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
+
+app.config.from_object(rq_dashboard.default_settings)
+app.register_blueprint(rq_dashboard.blueprint, url_prefix="/dashboard")
 
 redis_conn = Redis(host='redis', port=6379)
 q = Queue(connection=redis_conn)
@@ -18,7 +22,11 @@ def getJobStatus(id):
         return out_str
 
     job = q.fetch_job(id)
-    return job.get_status()
+    
+    if job == None:
+        return "ID not found"
+    else:
+        return job.get_status()
 
 @app.route('/job/add', methods=['POST',])
 def addJob():

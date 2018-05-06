@@ -1,8 +1,13 @@
+arrow==0.12.1
+backports.functools-lru-cache==1.5
 click==6.7
 Flask==1.0.2
 itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
+python-dateutil==2.7.2
 redis==2.10.6
 rq==0.10.0
+rq-dashboard==0.3.11
+six==1.11.0
 Werkzeug==0.14.1
