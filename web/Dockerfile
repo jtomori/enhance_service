@@ -5,6 +5,6 @@ RUN pip install -r requirements.txt
 RUN sed -e "s/REDIS_HOST = 'localhost'/REDIS_HOST = 'redis'/" \
     /usr/local/lib/python2.7/site-packages/rq_dashboard/default_settings.py > tmp && \ 
     mv tmp /usr/local/lib/python2.7/site-packages/rq_dashboard/default_settings.py
-ADD web.py slow_job.py /app/
-EXPOSE 5000
+ADD web.py /app/
+EXPOSE 80
 CMD ["python", "web.py"]

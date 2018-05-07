@@ -1,0 +1,10 @@
+version: "3"
+services:
+  web:
+    image: 127.0.0.1:5000/web
+  worker:
+    image: 127.0.0.1:5000/worker
+    deploy:
+      replicas: 5
+      restart_policy:
+        condition: on-failure

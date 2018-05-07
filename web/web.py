@@ -32,9 +32,9 @@ def getJobStatus(id):
 def addJob():
     json_in = request.get_json()
     
-    job = q.enqueue(slow_job, json_in["job"], result_ttl='1h')
+    job = q.enqueue(slow_job, json_in["job"], result_ttl="30m", timeout="10m")
     
     return job.get_id()
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", port=80, debug=True)
